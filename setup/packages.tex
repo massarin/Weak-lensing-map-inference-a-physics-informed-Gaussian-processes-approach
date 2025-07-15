@@ -1,0 +1,112 @@
+%% See the TeXed file for more explanations
+
+%% LaTeX Font encoding -- DO NOT CHANGE
+\usepackage[OT1]{fontenc}
+
+%% Babel provides support for languages.  'english' uses British
+%% English hyphenation and text snippets like "Figure" and
+%% "Theorem". Use the option 'ngerman' if your document is in German.
+%% Use 'american' for American English.  Note that if you change this,
+%% the next LaTeX run may show spurious errors.  Simply run it again.
+%% If they persist, remove the .aux file and try again.
+\usepackage[english]{babel}
+
+%% Input encoding 'utf8'. In some cases you might need 'utf8x' for
+%% extra symbols. Not all editors, especially on Windows, are UTF-8
+%% capable, so you may want to use 'latin1' instead.
+\usepackage[utf8]{inputenc}
+
+%% This changes default fonts for both text and math mode to use Herman Zapfs
+%% excellent Palatino font.  Do not change this.
+%\usepackage[sc]{mathpazo}
+\usepackage{lmodern}
+%\usepackage[italic]{mathastext}
+%\usepackage{newpxtext, newpxmath}
+%\usepackage{newtx}
+
+%% The AMS-LaTeX extensions for mathematical typesetting.  Do not
+%% remove.
+\usepackage{amsmath, bm, amssymb} %,,amsfonts,mathrsfs,
+
+%% NTheorem is a reimplementation of the AMS Theorem package. This
+%% will allow us to typeset theorems like examples, proofs and
+%% similar.  Do not remove.
+%% NOTE: Must be loaded AFTER amsmath, or the \qed placement will
+%% break
+\usepackage[amsmath,thmmarks]{ntheorem}
+
+%% Newcommands
+%\newtheorem*{definition*}{\textit{Definition.}}
+%\newtheorem*{proof*}{\textit{Proof.}}
+%\newtheorem{definition}{Definition}
+\newcommand*{\code}{\lstinline[keepspaces=true,breaklines]}
+\newcommand\x{0.28}
+
+%% LaTeX' own graphics handling
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+\usepackage{wrapfig}
+
+%% Draw maps
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
+
+%% Tables
+\usepackage{capt-of}% or \usepackage{caption}
+\usepackage{booktabs}
+\usepackage{varwidth}
+
+%% Valign
+\usepackage[export]{adjustbox} % for valign option
+
+%% We unfortunately need this for the Rules chapter.  Remove it
+%% afterwards; or at least NEVER use its underlining features.
+% \usepackage{soul}
+
+%% declaration of originality.
+\usepackage{pdfpages}
+
+%% [NEED] This allows for additional typesetting tools in mathmode.
+%% See its excellent documentation.
+\usepackage{mathtools}
+
+%% [NEED] Some extensions to tabulars and array environments.
+\usepackage{array}
+
+%% [OPT] Fancy package for source code listings.  The template text
+%% needs it for some LaTeX snippets; remove/adapt the \lstset when you
+%% remove the template content.
+\usepackage{listings}
+\lstset{language=TeX,basicstyle={\normalfont\ttfamily}}
+
+%% [REC] Fancy character protrusion.  Must be loaded after all fonts.
+%\usepackage[activate]{pdfcprot}
+
+%% Make document internal hyperlinks wherever possible. (TOC, references)
+%% This MUST be loaded after varioref, which is loaded in 'extrapackages'
+%% above.  We just load it last to be safe.
+\usepackage{hyperref} 
+\hypersetup{colorlinks=true,
+            linkcolor=blue,
+            anchorcolor=black,
+            citecolor=green,
+            filecolor=cyan,
+            menucolor=red,
+            runcolor=cyan,
+            urlcolor=cyan}
+
+\usepackage[backref=true, backend=biber, style=phys]{biblatex} %Imports biblatex package
+\emergencystretch=1em
+\setcounter{biburllcpenalty}{7000}
+\setcounter{biburlucpenalty}{8000}
+
+\DefineBibliographyStrings{english}{%
+  backrefpage = {page},% originally "cited on page"
+  backrefpages = {pages},% originally "cited on pages"
+}
+
+\addbibresource{refs.bib} %Import the bibliography file
+\usepackage{csquotes} % compatibility with biblatex
+
+\usepackage{enumitem}
+\setlist[itemize]{leftmargin=*}

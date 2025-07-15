@@ -1,0 +1,57 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%% CHAPTER %%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Introduction}
+
+Matter bends light. The theory of general relativity predicts that the presence of matter or energy changes the geometry of space and time, which in turn can cause what would otherwise be the straight path of a beam of light to curve. Take a distant source of light. If we assume the universe not to be empty, then between us and said source there exists a non trivial matter disposition. As light travels through everything that is in between us and the source, it gets blocked, bent and distorted. We call this phenomenon weak lensing. In practice what we measure is the shape of distant galaxies. These images do not show a distinct lensing feature individually, as such tiny changes can only be seen with a large number of sources. For example, we observe that galaxies have a tendency of aligning along a preferred axis, causing a statistical discrepancy in an otherwise seemingly isotropic universe. For further details on lensing, please refer to \cite{cosmology:lensing} \cite{cosmology:lensing2}; for weak lensing \cite{weaklensing}. The image of a distant galaxy can change shape or size. Changes in shape are fully characterised by the shear distortion $\Vec{\gamma}$ vector field, where the change in size is given by its magnitude, the convergence field $\kappa$. We lay out a theoretical framework for weak lensing in \textit{Sec. }\ref{sec:weak lensing} as well as details on the cosmology used in this thesis in \textit{Sec. }\ref{subsec:cosmology}.
+
+A lot of work goes into translating a measurement of distant galaxies to its mathematically friendly counterpart $\Vec{\gamma}$. This is one of the reasons why we will not be dealing with it in this thesis, as it is outside of our scope. Instead we will be simulating our own convergence fields. We use a \textit{Gaussian random field (GRF)} algorithm for the creation of Gaussianly distributed data. As well as lognormal transformations to create fields with a distribution that resembles more closely that in our universe. These transformations are listed in \textit{Sec. }\ref{sec:field generation}; we then use them to simulate our data as explained in \textit{Sec. }\ref{sec:data simulation}. We also verify that the generated fields recover the fiducial power spectrum in \textit{Sec. }\ref{sec:gaussian and lognormal fields}.
+
+
+\begin{wrapfigure}{r}{0.45\textwidth}
+\centering
+\begin{tikzpicture}
+  % Nodes
+  \node[diamond, draw=black, fill=black, text=white, minimum size=2.5cm, rounded corners] (a) at (0,0) {$\bm{\Theta}$};
+  \node[diamond, draw=black, fill=white, text=black, minimum size=2.5cm, rounded corners] (b) at (0,-3) {$C(\Theta)$};
+  \node[diamond, draw=black, fill=white, text=black, minimum size=2.5cm, rounded corners] (c) at (0,-6) {$w(\Theta)$};
+  \node[diamond, draw=black, fill=white, text=black, minimum size=2.5cm, rounded corners] (d) at (0,-9) {$\mathcal{GP}(\Theta)$};
+  \node[diamond, draw=black, fill=white, text=black, minimum size=2.5cm, rounded corners] (e) at (-3,-12) {$y$};
+  \node[diamond, draw=black, fill=black, text=white, minimum size=2.5cm, rounded corners] (f) at (0,-12) {$\bm{\mathcal{L}(\Theta \mid y)}$};
+
+  % Arrows
+  \draw[->, line width=1.5pt] (a) -- (b);
+  \draw[->, line width=1.5pt] (b) -- (c);
+  \draw[->, line width=1.5pt] (c) -- (d);
+  \draw[->, line width=1.5pt] (d) -- (f);
+  \draw[->, line width=1.5pt] (e) -- (f);
+
+\end{tikzpicture}
+\caption{Simplified steps taken by the model to go from cosmological parameters $\Theta$ to likelihood $\mathcal{L}$ using GP. Here $C$ and $w$ stand for the power spectrum and correlation function respectively, $y$ is the data.}
+\label{tik:GP pipeline}
+\end{wrapfigure}
+A \textit{Gaussian process (GP)} usually assumes little prior knowledge about the data it is applied to. Current research in the field of cosmology views GPs as a machine learning tool to be trained. It is used to accelerate and optimise models \cite{gp:acceleration} \cite{gp:acceleration2} \cite{gp:acceleration3}, as well as for its interpolation qualities applied to the reconstruction of functions determining the evolution of the universe \cite{gp:expansion} \cite{gp:expansion2} \cite{gp:expansion3}. Our work, however, is based on a different approach. We apply our prior knowledge about 2-point statistics in cosmology to create a fully informed GP. Restricting ourselves to 2D flat-sky weak lensing convergence fields, as shown in \textit{Fig. }\ref{tik:GP pipeline}, we can:
+\begin{itemize}
+    \item compute the angular power spectrum $C(\Theta)$ from a set of cosmological parameters $\Theta$,
+    \item transform it in the convergence angular autocorrelation function $w(\Theta)$,
+    \item create a zero mean GP with kernel given by said correlation function,
+    \item evaluate the likelihood $\mathcal{L}$ of $\Theta$ given a set of data points $y$.
+\end{itemize}
+With a Bayesian approach we make use of this pipeline to infer the values of the cosmological parameters. Running a \textit{Markov chain Monte Carlo (MCMC)} we can sample the posterior distribution of the cosmological parameters, in particular we will get contours for $\Omega_m$, $\sigma_8$ and $S_8$. Other than that, GPs have several other interesting properties at the field level. They are not only able to generate fields that recover the fiducial 2-point statistics, but are also able to reconstruct masked fields, a task that usually brings many challenges to $C_\ell$ estimation \cite{cellestim} \cite{cellestim2}. In the field of weak lensing in particular, foreground objects like bright stars or galaxies can contaminate measurements, leading to the need of masking such a region, essentially removing the signal.
+
+Here we list the advantages of our method:
+\begin{itemize}
+    \item minimal information loss, as it is a map based method we use all available data points,
+    \item it can be used as a likelihood for cosmological parameters inference,
+    \item easily deals with masked fields, providing estimates with an associated uncertainty for the masked points.
+\end{itemize}
+Whilst some of the disadvantages:
+\begin{itemize}
+    \item the conditioning process depends on the inverse of a correlation matrix, with a computational effort that grows as $\sim \mathcal{O}(n^3)$ for $n\propto$ data points, indicating possible scaling issues;
+    \item due to the intrinsic Gaussianity of GPs, the distribution of the samples will be Gaussian, making it hard to apply them to other fields, say for example lognormal fields.
+\end{itemize}
+GPs in this thesis are presented in a general introduction in \textit{Sec. }\ref{sec:gaussian process}, followed by a detailed account of the computational methods used to recover a working kernel for GPs in \textit{Sec. }\ref{sec:gaussian process kernel}. In our results we show their ability to create maps that follow the desired statistic \textit{Sec. }\ref{sec:gaussian process priors} and reconstruct data \textit{Sec. }\ref{sec:gaussian process map reconstruction}. We also present our attempt at cosmological parameters inference with GPs in \textit{Sec. }\ref{sec:inference of cosmological parameters}.
+
+It is important to note that throughout the thesis we follow the extremely useful guidelines set by the \code{Miko} pipeline \cite{fwdmodel} on how to deal with discrete maps in weak lensing. 
+
+%\cite{cmbmodel?}
