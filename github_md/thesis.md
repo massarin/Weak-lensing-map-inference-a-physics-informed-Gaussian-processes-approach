@@ -146,10 +146,10 @@ is said to be Rayleigh distributed. If we then multiply $`R`$ by the complex exp
 $$\phi(x) \equiv (\mathcal{F}^{-1} P^{1/2} R e^{i\theta})(x).
     \label{eq:grf 2D}$$
 
-
+<figure id="fig:rayleigh">
 ![Figure](images/7_rayleigh.png)
 <figcaption><span id="fig:rayleigh" data-label="fig:rayleigh"></span> Sampling a 2D Gaussian against a Rayleigh distributed amplitude with uniform complex phase. In purple is the complex number <span class="math inline"><em>X</em> + <em>i</em><em>Y</em></span> with <span class="math inline"><em>X</em>, <em>Y</em> ∼ 𝒩(0, 1)</span>, in cyan is <span class="math inline"><em>R</em><em>e</em><sup><em>i</em><em>θ</em></sup></span> with <span class="math inline"><em>R</em> ∼ ℛ(1)</span> and <span class="math inline"><em>θ</em> ∼ 𝒰(0, 2<em>π</em>)</span>.</figcaption>
-
+</figure>
 
 ### Lognormal field
 
@@ -188,10 +188,10 @@ $$\bm{f}_* \sim \mathcal{N}(\bm{m}, \bm{K}_{**}).
     \label{eq:gp prior}$$
 Here we adopt the convention $`\bm{K} = k(D_*,D_*)`$. When drawing a sample function from *Eq.* (eq:gp prior), computationally the operation is equivalent to drawing a vector from a multivariate Gaussian. What we obtain is a so-called prior, or priors, see *Fig.* <a href="#fig:priors" data-reference-type="ref" data-reference="fig:priors">2.2</a>.
 
-
+<figure id="fig:priors">
 ![Figure](images/1_priors.png)
 <figcaption>Prior samples of a GP with mean <span class="math inline"><em>m</em>(<strong>x</strong>) = 0</span> and squared exponential kernel <span class="math inline"><em>k</em>(<strong>x</strong>, <strong>x</strong><sup><strong>′</strong></sup>) = <em>e</em><sup>−(<strong>x</strong> − <strong>x</strong><sup><strong>′</strong></sup>)<sup>2</sup></sup></span>.</figcaption>
-
+</figure>
 
 Let’s now see how we can introduce knowledge of data points in this system. We divide the grid in training points $`D`$ and test points $`D_*`$. To each training point is associated a known value $`\bm{y}`$ and variance $`\sigma_n^2`$, whereas the values of the function at the test points $`\bm{f}_*`$ are unknown. We can summarise this as,
 $$\begin{bmatrix}
@@ -207,10 +207,10 @@ $$\bm{f}_* \mid D_*, D, \bm{y} \sim \mathcal{N}\left( \bm{K}^T_* [\bm{K} + \sigm
 \label{eq:conditioning}$$
 Conditioning can therefore give rise to what is called a posterior sample, *Fig.* <a href="#fig:posteriors" data-reference-type="ref" data-reference="fig:posteriors">2.3</a>. The result is still a multivariate Gaussian, but the mean and variance given by *Eq.* (eq:conditioning) generate samples that are a better guess of the behaviour of the function outside of the training points.
 
-
+<figure id="fig:posteriors">
 ![Figure](images/1_posteriors.png)
 <figcaption><span id="fig:posteriors" data-label="fig:posteriors"></span> Summary plot of a GP conditioned to some data. The cyan line is the mean of the GP and the filled region corresponds to <span class="math inline">1<em>σ</em></span>. The purple lines are posterior samples, which are distributed Gaussianly around the mean. The data points are clearly marked in black, they are also the points where all samples converge to.</figcaption>
-
+</figure>
 
 # Methods
 
@@ -237,9 +237,9 @@ This work follows in the general footsteps of data analysis of weak lensing surv
 $$n(z)=z^\alpha \exp{\left[-\left(\frac{z}{z_0}\right)^\beta\right]}.$$
 The choice of parameters has been made to emulate bin 5 of the *KiDS1000* survey (Hildebrandt, H. et al. 2021), with parameters $`\alpha=3.5`$, $`\beta=4.5`$, $`z_0=1`$.
 
-
-![Figure](images/2_smail.png) <span id="fig:smail" data-label="fig:smail"></span>
-
+<figure id="fig:smail">
+<p>![Figure](images/2_smail.png) <span id="fig:smail" data-label="fig:smail"></span></p>
+</figure>
 
 ### Map making pipeline
 
@@ -250,19 +250,19 @@ $$\begin{gathered}
 \end{gathered}$$
 Therefore, a map of size $`(10^{\circ},10^{\circ})`$ and a grid $`64\times64`$ will have limits $`(l_{\text{min}}, l_{\text{max}}) = (36, 2304)\text{rad}^{-1}`$. Now that we have the physical range for the power spectrum, we can generate data.
 
-
+<figure id="tik:cw">
 
 <figcaption>Sequence of transformations used to generate Gaussian and lognormal maps starting from the fiducial angular power spectrum. The top branch shows how to generate a GRF which when transformed to a lognormal field, follows the fiducial <span class="math inline"><em>C</em>(<em>l</em>)</span>. The bottom branch is a standard GRF realisation starting from the fiducial <span class="math inline"><em>C</em>(<em>l</em>)</span>. <span class="math inline"><em>L</em></span> and <span class="math inline"><em>G</em></span> stand for lognormal and Gaussian respectively. <span class="math inline">ℋ</span> is the Hankel transformation, and tilde refers to intermediate results.</figcaption>
-
+</figure>
 
 To generate a GRF, we employ the algorithm mentioned in *Eq.* (eq:grf 2D). However, in making a lognormal field, the matter is a bit more complicated. Any GRF on which we apply the lognormal transformation $`\mathcal{L}_\kappa`$, from *Eq.* (eq:L_k), becomes a lognormal field. The reason we do not just lognormal transform any field is given by the fact that they would not recover the fiducial power spectrum $`C(l)`$. Our goal is therefore to find a transfer GRF $`\tilde{\kappa}^G`$ which, when transformed lognormally, gives rise to a lognormal field $`\kappa^L`$ that recovers $`C(l)`$. To do so, we follow the sequence of transformations illustrated in the top branch of *Fig.* <a href="#tik:cw" data-reference-type="ref" data-reference="tik:cw">3.2</a>.
 
 ### Noise and mask
 
-
+<figure id="fig:mask">
 ![Figure](images/5_random_and_blocks_mask.png)
 <figcaption>Approximately <span class="math inline">10%</span> mask applied to the data. Size <span class="math inline">(10<sup>∘</sup>, 10<sup>∘</sup>)</span> and grid <span class="math inline">64 × 64</span>.</figcaption>
-
+</figure>
 
 As all data is being simulated, we only take into account the so-called shape noise, which is due to the intrinsic distribution of ellipticities and angle formed with respect to us. GPs will treat each pixel of the map as a random variable Gaussianly distributed with standard deviation given by (Croft et al. 2017),
 $$\sigma_\text{noise} = \frac{\sigma_e}{\sqrt{n_g A_{px}}}.
@@ -354,10 +354,10 @@ Which means that the correlation function is given by a *backwards* normalised i
 
 In order to perform a FFT in 2D, we will need a two dimensional extension of the angular power spectrum. We make use of its radial symmetry with respect to $`\bm{l}=(l_x,l_y)`$ and create a 2D grid of shape $`(M,M)`$ as shown in *Fig.* <a href="#tik:1D to 2D" data-reference-type="ref" data-reference="tik:1D to 2D">3.4</a>.
 
-
+<figure id="tik:1D to 2D">
 
 <figcaption>1D to 2D extension of the power spectrum <span class="math inline"><em>C</em>(<em>l</em>)</span></figcaption>
-
+</figure>
 
 Now that we have a 2D power spectrum we can take the inverse two dimensional fast Fourier transformation to obtain a 2D correlation function. In practice, we will test two grids, which we name *full-range FFT* method and *half-range FFT* method.
 
@@ -391,33 +391,33 @@ The disadvantages:
 
 We begin by testing the consistency of our Gaussian and lognormal maps generation pipeline.
 
-
+<figure id="fig:fields dist">
 ![Figure](images/4_Gaussian_lognormal_dist.png)
 <figcaption><span id="fig:fields dist" data-label="fig:fields dist"></span> Comparison of a Gaussian map, on the left, with a lognormal map on the right. Both maps arise from the same random seed. The colorbar has been adjusted to enhance the differences between the two. The histogram plot shows the clear difference in the map distributions.</figcaption>
-
+</figure>
 
 We show example realisations of the two fields in *Fig.* <a href="#fig:fields dist" data-reference-type="ref" data-reference="fig:fields dist">4.1</a>, Gaussian on left and lognormal on the right. There’s a visible difference between the two, as it can be seen clearly from the distribution plot. The main check to perform is for testing whether the generated fields recover the theoretical power spectrum. *Fig.* <a href="#fig:check fields" data-reference-type="ref" data-reference="fig:check fields">4.2</a> shows that this is the case for the Gaussian fields. They recover the fiducial $`C(l)`$ within a few percent error, with larger deviations $`\sim 5\%`$ at the low and high ends of the $`l`$-range. Instead, lognormal fields present deviations $`\gtrsim 10\%`$. As the lognormal transformations we use have been reported by different sources (Zhou et al. 2023)(Supranta Sarma Boruah, Rozo, and Fiedorowicz 2022), the issue must lie with our `JAX` implementation of the Hankel transformation. Resolving such issues could be achieved by future iterations of this work. In this work, we restrict ourselves to the use of Gaussian fields, as it is enough to prove our thesis and show that Gaussian processes can be applied to cosmological fields.
 
-
+<figure id="fig:check fields">
 ![Figure](images/4_Gaussian_lognormal_check.png)
 <figcaption><span id="fig:check fields" data-label="fig:check fields"></span> Power spectrum estimation from Gaussian and lognormal maps. Mean and standard deviation are calculated with 500 realisation of both fields.</figcaption>
-
+</figure>
 
 ### Gaussian process priors
 
 First, we test the ability of the kernels we have built in *Sec.* <a href="#sec:gaussian process kernel" data-reference-type="ref" data-reference="sec:gaussian process kernel">3.2</a> to recover the power spectrum of our cosmology.
 
-
+<figure id="fig:check methods">
 ![Figure](images/3_kernel_comparison.png)
 <figcaption><span id="fig:check methods" data-label="fig:check methods"></span> Reconstructed power spectrum from prior sample of GP with the four proposed kernels: integration, FFTlog, full-range FFT, half-range FFT and sinc FFTlog. Mean and standard deviation are calculated with 500 prior samples from each GP. </figcaption>
-
+</figure>
 
 We test five models in *Fig.* <a href="#fig:check methods" data-reference-type="ref" data-reference="fig:check methods">4.3</a>: integration, FFTlog, full-range FFT, half-range FFT and sinc FFTlog. The first four methods are described in the Gaussian process kernels *Sec.* <a href="#sec:gaussian process kernel" data-reference-type="ref" data-reference="sec:gaussian process kernel">3.2</a>, whereas the sinc FFTlog referes to a FFTlog model on which we applied smoothing, by multiplying the power spectrum by a factor of $`sinc^4(l\frac{L}{2\pi N})`$. The recovered power spectra are plotted against the fiducial power spectrum, or smoothed power spectrum for the sinc FFTlog. Mean and standard deviation associated to the plots are calculated from 500 samples. As expected the integration, FFTlog and full-range FFT perform similarly, as they all contain the same ammount of information. As these models deviate so strongly from the fiducial power spectrum we tried applying smoothing, which helps to recover half of the $`l`$-range at large scales. The only method that seems to be consistently recovering the fiducial power spectrum is the half-range FFT. One could argue that due to the inherent discreteness and boundedness of the fields we are working with, using FFTs is the most natural choice; also, half-range FFT uses the only grid that recovers a correlation function of the same shape as the field without having to perform binning.
 
-
+<figure id="fig:check cosmology">
 ![Figure](images/3_cosmology_comparison.png)
 <figcaption><span id="fig:check cosmology" data-label="fig:check cosmology"></span> Reconstructed power spectrum from prior samples of a GP, as a function of <span class="math inline">{<em>σ</em><sub>8</sub>, <em>S</em><sub>8</sub>}</span>. Mean and standard deviation are calculated with 500 prior samples for each different cosmology.</figcaption>
-
+</figure>
 
 We have also tested the efficacy of the half-range FFT model for different cosmologies of values $`\{\sigma_8, S_8\}`$ equal to $`\{0.4,0.2\}`$, $`\{1.2,1.5\}`$ and, our fiducial cosmology, $`\{0.8,0.8\}`$. As *Fig.* <a href="#fig:check cosmology" data-reference-type="ref" data-reference="fig:check cosmology">4.4</a> shows, the model is independent of the choice of cosmology. From here on the results will be presented assuming a kernel built with the half-range FFT model.
 
@@ -425,10 +425,10 @@ We have also tested the efficacy of the half-range FFT model for different cosmo
 
 Armed with a reliable kernel, let’s embark upon the journey of reconstructing a heavily masked cosmological field. What we will do is: create a noiseless GRF in the fiducial cosmology *Tab.* (tab:fiducial_cosmology), *True* map; apply a mask to obtain the *Data* map; condition a Gaussian process which assumes the fiducial cosmology. *Fig.* <a href="#fig:GP reconstruction summary" data-reference-type="ref" data-reference="fig:GP reconstruction summary">4.5</a> lists the result of this operation, showing the resulting mean $`\mu`$ and standard deviation $`\sigma`$ of the conditioned GP. We also plot the ratio between residuals $`\Delta=\mu-`$*True* and standard deviation squared, to test the goodness of fit of our model, the values of the map sum up to $`\chi^2 \sim 2495`$. With the mask covering $`\nu=2353`$ pixels, we obtain $`\chi^2 / \nu = 1.06`$. Of course, this is just a noiseless application, which is unreasonable for a real application.
 
-
+<figure id="fig:GP reconstruction summary">
 ![Figure](images/2_summary.png)
 <figcaption><span id="fig:GP reconstruction summary" data-label="fig:GP reconstruction summary"></span>Summary of field reconstruction abilities of a Gaussian process conditioned on data. The left column shows the masked GRF, which is our data. The middle column shows the true GRF without masks and a posterior sample drawn from the conditioned GP. The right column shows maps of the mean, standard deviation and residuals over standard deviation squared of the conditioned GP. Regions of higher uncertainty correspond to the masked regions. The residuals over standard deviation map also shows how regions with low mask recover the data.</figcaption>
-
+</figure>
 
 ## Inference of cosmological parameters
 
@@ -452,13 +452,13 @@ to infer deterministically a posterior for $`\Omega_m`$. Such a reparametrisatio
 
 As a first step and for a consistency check, we run the inference model for one cosmological parameter, keeping all others fixed. Using a $`64\times64`$ grid with $`n_g=10 \text{ galaxies}/\text{arcmin}^2`$. In *Fig.* <a href="#fig:MCMC one parameter" data-reference-type="ref" data-reference="fig:MCMC one parameter">4.6</a> we show the inferred distribution for both $`\sigma_8`$ and $`\Omega_m`$. We find that we are able to recover the true value for both parameters within two sigmas, $`\sigma_8 = 0.776\pm0.015`$ and $`\Omega_m = 0.284\pm0.010`$. We notice a slight tendency of the inferred distribution to be biased low; a tendency we also observe next for both sampled parameters, $`S_8`$ and $`\sigma_8`$.
 
-
+<figure id="fig:MCMC one parameter">
 ![Figure](images/6_MCMC_sigma_parameters.png)
 
 ![Figure](images/6_MCMC_omega_parameters.png)
 
 <figcaption><span id="fig:MCMC one parameter" data-label="fig:MCMC one parameter"></span> Inferred posterior distribution of <span class="math inline"><em>σ</em><sub>8</sub></span> on the left and <span class="math inline"><em>Ω</em><sub><em>m</em></sub></span> on the right. Dotted lines indicate the <span class="math inline">1<em>σ</em></span> level. Truth values corresponding to the fiducial cosmology are indicated in blue.</figcaption>
-
+</figure>
 
 ### Two parameters
 
@@ -494,25 +494,25 @@ Mean and sigma values recovered from the inferred distributions of the cosmologi
 
 *Fig.* <a href="#fig:MCMC two parameters" data-reference-type="ref" data-reference="fig:MCMC two parameters">4.7</a> shows the inferred posterior distributions and contours for the three cosmological parameters $`\sigma_8`$, $`\Omega_m`$ and $`S_8`$. Looking at the contours, we obtain the well known banana-shaped degeneracy between $`\sigma_8`$ and $`\Omega_m`$. The $`S_8`$ and $`\Omega_m`$ contour presents sharp cuts for high and low $`\Omega_m`$, indicating an issue with the bounds of the uniform priors imposed. Unfortunately the `jaxcosmo` package does not allow for the choice of priors to be wider than what shown in *Tab.* (tab:priors), as the model then starts to have divergent samples.
 
-
+<figure id="fig:MCMC two parameters">
 ![Figure](images/5_MCMC_two_parameters.png)
 <figcaption><span id="fig:MCMC two parameters" data-label="fig:MCMC two parameters"></span> Inferred posterior distributions of <span class="math inline"><em>S</em><sub>8</sub></span>, <span class="math inline"><em>σ</em><sub>8</sub></span> and <span class="math inline"><em>Ω</em><sub><em>m</em></sub></span>. For noise level <span class="math inline"><em>σ</em><sub>noise</sub> ∼ 0.0088</span>. Contours indicate the <span class="math inline">1<em>σ</em></span> and <span class="math inline">2<em>σ</em></span> credible interval respectively. Dotted lines indicate the <span class="math inline">1<em>σ</em></span> level. Truth values corresponding to the fiducial cosmology are indicated in blue.</figcaption>
-
+</figure>
 
 ### Posterior checks
 
 Following the two parameter inference model, we perform some posterior checks at the map level (Porqueres et al. 2021). *Fig.* <a href="#fig:MCMC summary" data-reference-type="ref" data-reference="fig:MCMC summary">4.9</a> sums up the ability of the model to recover the true map, noiseless and unmasked. Here we present the run with noise level $`\sigma_\text{noise}\sim 0.0088`$ and a $`64\times64`$ grid. We show the mean and standard deviation for the sample with highest likelihood out of the $`12000`$. The mean field $`\mu`$ is visibly different to the true field in the masked regions and it seems to be of overall lower amplitude. The sample map is comparable to the noisy data; which is to be expected, as the internal noise given to the Gaussian process is the same as the noise level of the data. The standard deviation map $`\sigma`$ presents an overall amplitude comparable to the noise level $`\sim 0.010`$, with higher values for the masked regions. Summing up the map values of the residuals divided by standard deviation squared, we obtain a $`\chi^2\sim 1297.4`$. Compared to the number of free parameters $`\nu`$ in our inference model, which for a $`10\%`$ mask and a $`64\times64`$ grid, is $`\nu=3689`$. The value of $`\chi^2`$ therefore seems to be low, indicating that the noise level assumed by the GP is overestimated. This is supported by the fact that the sample map looks just as noisy as the data, according to *Fig.* <a href="#fig:residuals vs noise" data-reference-type="ref" data-reference="fig:residuals vs noise">4.8</a>, its distribution is in fact just as wide as the noise.
 
-
+<figure id="fig:residuals vs noise">
 ![Figure](images/5_residuals_vs_noise.png)
-<em>Residuals</em>
+<p><em>Residuals</em></p>
 <figcaption><span id="fig:residuals vs noise" data-label="fig:residuals vs noise"></span> Residual distributions of the mean and sample compared to noise. The mean is less spread, whereas the sample is wider.</figcaption>
+</figure>
 
-
-
+<figure id="fig:MCMC summary">
 ![Figure](images/5_summary.png)
 <figcaption><span id="fig:MCMC summary" data-label="fig:MCMC summary"></span> Summary of the two parameter inference at the map level. The left column shows the masked and noisy GRF realisation used, which is our data. The middle column shows the true GRF and a sample from the conditioned GP. The right column shows maps of the mean, standard deviation and residuals over standard deviation squared resulting from the numpyro model sample with highest likelihood. Regions of higher uncertainty correspond to the masked regions.</figcaption>
-
+</figure>
 
 # Conclusion
 
