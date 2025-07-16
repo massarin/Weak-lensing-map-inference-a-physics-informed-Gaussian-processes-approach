@@ -1,12 +1,14 @@
-<div class="titlingpage">
+# Weak Lensing Map Inference: A Physics-Informed Gaussian Processes Approach
 
-<div class="adjustwidth*">
+*Master's Thesis*  
+*Nicola Massari*  
+*ETH Zurich, 2024*
 
--
+## Abstract
 
-</div>
+This thesis introduces Gaussian processes (GPs) to the landscape of map inference for cosmological fields, specifically weak lensing convergence. Unlike traditional GP applications that assume minimal prior knowledge, we apply physical knowledge about 2-point statistics in cosmology to create fully informed GPs. Our approach uses the convergence angular autocorrelation function as the GP kernel, enabling both field reconstruction and cosmological parameter inference.
 
-</div>
+---
 
 # Introduction
 
