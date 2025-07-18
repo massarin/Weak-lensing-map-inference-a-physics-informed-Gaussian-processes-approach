@@ -1,15 +1,13 @@
 cff-version: 1.2.0
-title: "Weak lensing map inference: a physics-informed Gaussian process approach"
 message: "If you use this work, please cite it using the metadata from this file."
-type: mastersthesis
 authors:
   - given-names: Nicolò
     family-names: Massari
     affiliation: ETH Zurich
     orcid: 'https://orcid.org/0009-0006-8421-930X'
-identifiers:
-  - type: doi
-    value: 10.5281/zenodo.16085961
+title: "Weak lensing map inference: a physics-informed Gaussian process approach"
+type: mastersthesis
+doi: 10.5281/zenodo.16085961
 repository-code: "https://github.com/massarin/Weak-lensing-map-inference-a-physics-informed-Gaussian-processes-approach"
 keywords:
   - Gaussian processes
