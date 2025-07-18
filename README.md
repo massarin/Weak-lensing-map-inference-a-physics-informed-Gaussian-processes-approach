@@ -15,6 +15,7 @@ In this work we propose the use of physically informed Gaussian processes (GP) t
 
 ## Citation
 
+```bibtex
 @mastersthesis{Massari_Weak_lensing_map_2024,
 author = {Massari, Nicolò},
 doi = {10.5281/zenodo.16085961},
@@ -22,3 +23,4 @@ month = apr,
 title = {{Weak lensing map inference: a physics-informed Gaussian process approach}},
 year = {2024}
 }
+```
