@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it using the metadata from this file."
+authors:
+  - given-names: "Nicolò"
+    family-names: "Massari"
+    orcid: "https://orcid.org/0009-0006-8421-930X"
+title: "Weak lensing map inference: a physics-informed Gaussian process approach"
+doi: 10.5281/zenodo.16085961
+preferred-citation:
+  type: mastersthesis
+  authors:
+  - given-names: "Nicolò"
+    family-names: "Massari"
+    orcid: "https://orcid.org/0009-0006-8421-930X"
+  doi: "10.5281/zenodo.16085961"
+  title: "Weak lensing map inference: a physics-informed Gaussian process approach"
+  month: 4
+  year: 2024
