@@ -3,12 +3,6 @@ message: "If you use this work, please cite it using the metadata from this file
 authors:
   - given-names: "Nicolò"
     family-names: "Massari"
-    affiliation: "ETH Zurich"
     orcid: "https://orcid.org/0009-0006-8421-930X"
 title: "Weak lensing map inference: a physics-informed Gaussian process approach"
-type: mastersthesis
 doi: 10.5281/zenodo.16085961
-keywords:
-  - Gaussian processes
-  - Weak lensing
-license: MIT
