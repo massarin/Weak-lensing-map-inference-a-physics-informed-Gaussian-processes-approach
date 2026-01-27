@@ -37,10 +37,10 @@ jobs:
           node-version: 20.x
       - name: Install MyST
         run: npm install -g mystmd
-      - name: Build PDF Assets
-        run: myst build --pdf
       - name: Build HTML Assets
         run: myst build --html
+      - name: Copy thesis.pdf into site
+        run: cp thesis.pdf _build/html/thesis.pdf
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
         with:
